@@ -1,5 +1,6 @@
 # WCDB使用(这儿使用的是2.0.4版本)
 
+```
 /*
  * 这儿对WCDB的操作打开了监听日志的，可留意控制台打印信息
  * 对WCDB的任何操作都依赖于模型绑定，模型首先要遵循TableCodable协议，需要存储的值需要在enum CodingKeys: String, CodingTableKey{}里面case 记录，static let objectRelationalMapping = TableBinding(CodingKeys.self) {}方法里设置你对数据库存储值的设定
@@ -427,3 +428,5 @@ private func integratedQueryMenuItems() -> UIMenu {
  * 文件模版安装完成后，在 Xcode 的菜单 File -> New -> File... 中创建新文件，通用数据模版选择 TableCodable。 在弹出的菜单中输入文件名，并选择 Language 为 Swift 即可。
  * 自定义类型模版选择 ColumnCodable
  */
+
+```
