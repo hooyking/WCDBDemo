@@ -1,5 +1,4 @@
 # WCDB使用(这儿使用的是2.0.4版本)
-
 ```
 /*
  * 这儿对WCDB的操作打开了监听日志的，可留意控制台打印信息
@@ -15,6 +14,7 @@ private func addMenuItems() -> UIMenu {
         object.identifier = 1
         object.description = "abc"
         //纯插入操作，由于设置了identifier为主键，所以identifier必须唯一，不然插入必失败并打印错误
+        
         try? DBManager.shared.db.insert(object, intoTable: "\(Sample.self)")
     }
     let addAction2 = UIAction.init(title: "insertOrReplace") { _ in
@@ -22,6 +22,7 @@ private func addMenuItems() -> UIMenu {
         object.identifier = 1
         object.description = "abcd"
         //当主键重复时即为更新，不重复时即直接插入数据
+        
         try? DBManager.shared.db.insertOrReplace(object, intoTable: "\(Sample.self)")
     }
     let addAction3 = UIAction.init(title: "insertOrIgnore") { _ in
@@ -29,6 +30,7 @@ private func addMenuItems() -> UIMenu {
         object.identifier = 1
         object.description = "abcdefg"
         //当出现主键重复时，直接忽略此操作，不重复时才插入
+        
         try? DBManager.shared.db.insertOrIgnore(object, intoTable: "\(Sample.self)")
     }
     let addAction4 = UIAction.init(title: "带自定义对象insert") { _ in
@@ -39,12 +41,14 @@ private func addMenuItems() -> UIMenu {
         let cuModel = Customer(with: Value(data))
         object.myClass = cuModel
         //这儿的Customer自定义对象我们使用二进制存储，存储自定义对象只需要遵循ColumnCodable协议，且实现init?(with Value)和archivedValue方法，这两个方法相当于是解归档
+        
         try? DBManager.shared.db.insert(object, intoTable: "\(Sample.self)")
     }
     let addAction5 = UIAction.init(title: "Sample设置了description不为空而传入空值") { _ in
         let object = Sample()
         object.identifier = 10
         //Sample设置了description不可为空，这样插入会失败且报错
+        
         try? DBManager.shared.db.insert(object, intoTable: "\(Sample.self)")
     }
     return UIMenu.init(children: [addAction1,addAction2,addAction3,addAction4,addAction5])
@@ -54,7 +58,11 @@ private func addMenuItems() -> UIMenu {
 private func deleteMenuItems() -> UIMenu {
     let deleteAction1 = UIAction.init(title: "delete") { _ in
         //delete(fromTable table: String,where condition: Condition? = nil,orderBy orderList: [OrderBy]? = nil,limit: Limit? = nil,offset: Offset? = nil)，这五个组合起来可以理解为：将 table 表内，满足 condition 的数据，按照 orderList 的方式进行排序，然后从头开始第 offset 行数据后的 limit 行数据删除，各参数代表的含义：table：表名,condition：条件，这儿可以多个条件合并，orderList：排序规则，这儿是数组，可以有多个列的排序规则，limit：无offset时理解为前 limit 行，有offset时理解为后 limit 行，offset：前 offset 行
-        try? DBManager.shared.db.delete(fromTable: "\(Sample.self)",where: Sample.Properties.identifier > 2 && Sample.Properties.description == "abc",orderBy: [Sample.Properties.identifier.asOrder().order(.descending)],limit: 2,offset: 3)
+        
+        try? DBManager.shared.db.delete(fromTable: "\(Sample.self)",
+                                         where: Sample.Properties.identifier > 2 && Sample.Properties.description == "abc",
+                                         orderBy: [Sample.Properties.identifier.asOrder().order(.descending)],
+                                         limit: 2,offset: 3)
     }
     
     return UIMenu.init(children: [deleteAction1])
@@ -67,12 +75,19 @@ private func changeMenuItems() -> UIMenu {
         let object = Sample()
         object.description = "byObject"
         
-        try? DBManager.shared.db.update(table: "\(Sample.self)", on: [Sample.Properties.description], with: object,where: Sample.Properties.identifier > 1)
+        try? DBManager.shared.db.update(table: "\(Sample.self)",
+                                         on: [Sample.Properties.description],
+                                         with: object,
+                                         where: Sample.Properties.identifier > 1)
     }
     let changeAction2 = UIAction.init(title: "基于值的更新(update with row)") { _ in
         let row: [ColumnCodable] = ["byRow"]
         //当on后的参数包含myClass而未设定myClass的值时，会置空
-        try? DBManager.shared.db.update(table: "\(Sample.self)", on: [Sample.Properties.description,Sample.Properties.myClass], with: row, where: Sample.Properties.identifier == 10000)
+        
+        try? DBManager.shared.db.update(table: "\(Sample.self)",
+                                         on: [Sample.Properties.description,Sample.Properties.myClass],
+                                         with: row,
+                                         where: Sample.Properties.identifier == 10000)
     }
     
     return UIMenu.init(children: [changeAction1,changeAction2])
@@ -93,6 +108,7 @@ private func changeMenuItems() -> UIMenu {
 
 private func checkMenuItems() -> UIMenu {
     let checkAction1 = UIAction.init(title: "getObjects(全部列的查询)") { _ in
+        
         do {
             let allObjects: [Sample] = try DBManager.shared.db.getObjects(on: Sample.Properties.all, fromTable: "\(Sample.self)")
             print("getObjects(全部列的查询)",allObjects)
@@ -101,6 +117,7 @@ private func checkMenuItems() -> UIMenu {
         }
     }
     let checkAction2 = UIAction.init(title: "getObject(全部列的查询)") { _ in
+        
         do {
             //"getObject" 等价于 limit: 1 时的 "getObjects" 接口
             let object: Sample? = try DBManager.shared.db.getObject(on: Sample.Properties.all, fromTable: "\(Sample.self)")
@@ -115,6 +132,7 @@ private func checkMenuItems() -> UIMenu {
         
     }
     let checkAction3 = UIAction.init(title: "getObjects(部分列的查询)") { _ in
+        
         do {
             let allObjects: [Sample] = try DBManager.shared.db.getObjects(on: [Sample.Properties.identifier,Sample.Properties.myClass], fromTable: "\(Sample.self)")
             print("getObjects(部分列的查询)",allObjects)
@@ -123,6 +141,7 @@ private func checkMenuItems() -> UIMenu {
         }
     }
     let checkAction4 = UIAction.init(title: "getRows(全部列的查询)") { _ in
+        
         do {
             let allRows = try DBManager.shared.db.getRows(on: Sample.Properties.all, fromTable: "\(Sample.self)")
             print("getRows(全部列的查询)",allRows)
@@ -133,6 +152,7 @@ private func checkMenuItems() -> UIMenu {
         }
     }
     let checkAction5 = UIAction.init(title: "getRow(全部列的查询)") { _ in
+        
         do {
             //若是带 offset 参数表示查询第 offset+1 行
             let row = try DBManager.shared.db.getRow(on: Sample.Properties.all, fromTable: "\(Sample.self)",offset: 1)
@@ -143,6 +163,7 @@ private func checkMenuItems() -> UIMenu {
         }
     }
     let checkAction6 = UIAction.init(title: "getColumn(部分列的查询)") { _ in
+        
         do {
             //获取 description 列
             let descriptionColumn = try DBManager.shared.db.getColumn(on: Sample.Properties.description, fromTable: "\(Sample.self)")
@@ -153,6 +174,7 @@ private func checkMenuItems() -> UIMenu {
         }
     }
     let checkAction7 = UIAction.init(title: "getDistinctColumn(部分列的查询)") { _ in
+        
         do {
             //获取 description 列
             let distinctDescriptionColumn = try DBManager.shared.db.getDistinctColumn(on: Sample.Properties.description, fromTable: "\(Sample.self)")
@@ -163,6 +185,7 @@ private func checkMenuItems() -> UIMenu {
         }
     }
     let checkAction8 = UIAction.init(title: "getValue(部分列的查询)") { _ in
+        
         do {
             //获取 description 列，无offset参数代表第一行，有即 offset+1行
             let value = try DBManager.shared.db.getValue(on: Sample.Properties.description, fromTable: "\(Sample.self)")
@@ -173,6 +196,7 @@ private func checkMenuItems() -> UIMenu {
         }
     }
     let checkAction9 = UIAction.init(title: "getValue(identifier最大值的查询)") { _ in
+        
         do {
             //获取 identifier最大值
             let value = try DBManager.shared.db.getValue(on: Sample.Properties.identifier.max(), fromTable: "\(Sample.self)")
@@ -183,6 +207,7 @@ private func checkMenuItems() -> UIMenu {
         }
     }
     let checkAction10 = UIAction.init(title: "getDistinctValue(不重复的description查询)") { _ in
+        
         do {
             //获取不重复的description的值
             let value = try DBManager.shared.db.getDistinctValue(on: Sample.Properties.description, fromTable: "\(Sample.self)")
@@ -192,8 +217,27 @@ private func checkMenuItems() -> UIMenu {
             
         }
     }
+    let checkAction11 = UIAction.init(title: "联表查询prepareMultiSelect（需要先执行可中断事务，在另一张sampleTable插入些数据）") { _ in
+        
+        do {
+            //这儿联表查询需要查哪些列的只能单独列出来，不能用.all
+            let multiSelect = try DBManager.shared.db.prepareMultiSelect(on: [Sample.Properties.identifier.in(table: "\(Sample.self)"),
+                                                                              Sample.Properties.description.in(table: "\(Sample.self)"),
+                                                                              Sample.Properties.identifier.in(table: "sampleTable"),
+                                                                              Sample.Properties.description.in(table: "sampleTable")],
+                                                                         fromTables: ["\(Sample.self)","sampleTable"])
+                .where(Sample.Properties.identifier.in(table: "\(Sample.self)") == Sample.Properties.identifier.in(table: "sampleTable"))
+            while let multiObject = try multiSelect.nextMultiObject() {
+                let sample = multiObject["\(Sample.self)"] as? Sample
+                let otherSample = multiObject["sampleTable"] as? Sample
+                print("联表查询",sample,otherSample)
+            }
+        } catch {
+            
+        }
+    }
     
-    return UIMenu.init(children: [checkAction1,checkAction2,checkAction3,checkAction4,checkAction5,checkAction6,checkAction7,checkAction8,checkAction9,checkAction10 ])
+    return UIMenu.init(children: [checkAction1,checkAction2,checkAction3,checkAction4,checkAction5,checkAction6,checkAction7,checkAction8,checkAction9,checkAction10,checkAction11])
 }
 
 //MARK: - 表
@@ -203,6 +247,7 @@ private func checkMenuItems() -> UIMenu {
 
 private func tableMenuItems() -> UIMenu {
     //下面增删改查分别写个示例
+    
     let table = DBManager.shared.db.getTable(named: "\(Sample.self)",of: Sample.self)
     let tableAction1 = UIAction.init(title: "增") { _ in
         let object = Sample()
@@ -239,11 +284,12 @@ private func tableMenuItems() -> UIMenu {
  */
 
 private func transactionMenuItems() -> UIMenu {
+    
     let table = DBManager.shared.db.getTable(named: "\(Sample.self)",of: Sample.self)
     let transAction1 = UIAction.init(title: "多个对象单独插入") { _ in
         let object = Sample()
         object.description = "多个对象单独插入"
-        let objects = Array(repeating: object, count: 100000)
+        let objects = Array(repeating: object, count: 2000)
         
         for object in objects {
             try? table.insert(object)
@@ -252,10 +298,9 @@ private func transactionMenuItems() -> UIMenu {
     let transAction2 = UIAction.init(title: "多个对象事务插入") { _ in
         let object = Sample()
         object.description = "多个对象事务插入"
-        let objects = Array(repeating: object, count: 100000)
+        let objects = Array(repeating: object, count: 2000)
         
         //insert(objects:) 接口内置了事务，并对批量数据做了针对性的优化，性能更好
-        
         try? DBManager.shared.db.run(transaction: { _ in
             for object in objects {
                 try? table.insert(object)
@@ -276,23 +321,24 @@ private func transactionMenuItems() -> UIMenu {
         } catch {
             
         }
+        
     }
     let transAction4 = UIAction.init(title: "插入查询都写在事务中") { _ in
         DispatchQueue(label: "other thread").async {
             try? table.delete()
+            try? DBManager.shared.db.run(transaction: { _ in
+                let object = Sample()
+                object.description = "都写在事务中"
+                try? table.insert(object)
+                do {
+                    let objects = try table.getObjects(on: Sample.Properties.all)
+                    print("插入查询都写在事务中",objects.count) // 输出1
+                } catch {
+                    
+                }
+            })
         }
-
-        try? DBManager.shared.db.run(transaction: { _ in
-            let object = Sample()
-            object.description = "都写在事务中"
-            try? table.insert(object)
-            do {
-                let objects = try table.getObjects(on: Sample.Properties.all)
-                print("插入查询都写在事务中",objects.count) // 输出1
-            } catch {
-                
-            }
-        })
+        
     }
     //WCDB Swift 提供了四种事务，普通事务、可控事务、嵌入事务和可中断事务
     //上面的transAction1和transAction2皆为普通事务
@@ -428,5 +474,4 @@ private func integratedQueryMenuItems() -> UIMenu {
  * 文件模版安装完成后，在 Xcode 的菜单 File -> New -> File... 中创建新文件，通用数据模版选择 TableCodable。 在弹出的菜单中输入文件名，并选择 Language 为 Swift 即可。
  * 自定义类型模版选择 ColumnCodable
  */
-
 ```

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="home" id="BYZ-38-t0r" customClass="ViewController" customModule="WCDBDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NyX-ZR-6sb">
+                                <rect key="frame" x="61.666666666666657" y="99" width="75" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="QYt-TT-cUA"/>
+                                    <constraint firstAttribute="height" constant="45" id="tJk-ck-TYf"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="增"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LM8-8W-UpC">
+                                <rect key="frame" x="256.66666666666669" y="99" width="75" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="MXu-g8-Iqo"/>
+                                    <constraint firstAttribute="width" constant="75" id="h6i-YI-1Hy"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="删"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1vg-oz-5wd">
+                                <rect key="frame" x="61.666666666666657" y="204" width="75" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="eUL-bW-cRF"/>
+                                    <constraint firstAttribute="width" constant="75" id="mcb-jS-Mj0"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="改"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUY-Ja-OxF">
+                                <rect key="frame" x="256.66666666666669" y="204" width="75" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="EzA-bN-tTr"/>
+                                    <constraint firstAttribute="width" constant="75" id="Ou9-XU-hTK"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="查"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gP-tc-Ed4">
+                                <rect key="frame" x="256.66666666666669" y="309" width="75" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="b1h-zA-TLj"/>
+                                    <constraint firstAttribute="width" constant="75" id="ufD-Ty-Pr6"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="事务"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Is-uH-KHE">
+                                <rect key="frame" x="61.666666666666657" y="309" width="75" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="HQz-TN-QQc"/>
+                                    <constraint firstAttribute="height" constant="45" id="uaj-QF-qre"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="表"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Us-cW-Cbw">
+                                <rect key="frame" x="11.666666666666671" y="414" width="175" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="175" id="QK4-Z0-vAg"/>
+                                    <constraint firstAttribute="height" constant="45" id="pVb-5w-yBM"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="清空所有表"/>
+                                <connections>
+                                    <action selector="cleanTableAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="woj-Wu-tmN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUF-Ll-ITC">
+                                <rect key="frame" x="206.66666666666663" y="414" width="175" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="PIT-xl-Kos"/>
+                                    <constraint firstAttribute="width" constant="175" id="Sv6-F8-UsK"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="语言集成查询"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBrownColor"/>
+                        <constraints>
+                            <constraint firstItem="0Is-uH-KHE" firstAttribute="top" secondItem="1vg-oz-5wd" secondAttribute="bottom" constant="60" id="252-uB-bsz"/>
+                            <constraint firstItem="5gP-tc-Ed4" firstAttribute="centerY" secondItem="0Is-uH-KHE" secondAttribute="centerY" id="Ddo-FH-lHG"/>
+                            <constraint firstItem="PUF-Ll-ITC" firstAttribute="centerX" secondItem="5gP-tc-Ed4" secondAttribute="centerX" id="EX5-wB-Tbs"/>
+                            <constraint firstItem="5Us-cW-Cbw" firstAttribute="centerX" secondItem="0Is-uH-KHE" secondAttribute="centerX" id="Ew1-P6-bHc"/>
+                            <constraint firstItem="0Is-uH-KHE" firstAttribute="centerX" secondItem="1vg-oz-5wd" secondAttribute="centerX" id="FCd-8H-nRc"/>
+                            <constraint firstItem="oUY-Ja-OxF" firstAttribute="centerY" secondItem="1vg-oz-5wd" secondAttribute="centerY" id="Gpv-nJ-TKa"/>
+                            <constraint firstItem="1vg-oz-5wd" firstAttribute="top" secondItem="NyX-ZR-6sb" secondAttribute="bottom" constant="60" id="Wgq-BB-4od"/>
+                            <constraint firstItem="oUY-Ja-OxF" firstAttribute="centerX" secondItem="LM8-8W-UpC" secondAttribute="centerX" id="XZF-Pb-R1p"/>
+                            <constraint firstItem="LM8-8W-UpC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="centerX" constant="60" id="eBw-ue-zrE"/>
+                            <constraint firstItem="LM8-8W-UpC" firstAttribute="centerY" secondItem="NyX-ZR-6sb" secondAttribute="centerY" id="evd-rc-c1C"/>
+                            <constraint firstItem="1vg-oz-5wd" firstAttribute="centerX" secondItem="NyX-ZR-6sb" secondAttribute="centerX" id="fz9-JK-F5i"/>
+                            <constraint firstItem="5gP-tc-Ed4" firstAttribute="centerX" secondItem="oUY-Ja-OxF" secondAttribute="centerX" id="gRk-V2-gLy"/>
+                            <constraint firstItem="NyX-ZR-6sb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="hif-Ew-20M"/>
+                            <constraint firstItem="PUF-Ll-ITC" firstAttribute="centerY" secondItem="5Us-cW-Cbw" secondAttribute="centerY" id="mnq-Mr-cwh"/>
+                            <constraint firstItem="NyX-ZR-6sb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="centerX" constant="-60" id="opg-fp-0GH"/>
+                            <constraint firstItem="5Us-cW-Cbw" firstAttribute="top" secondItem="0Is-uH-KHE" secondAttribute="bottom" constant="60" id="vcj-Oj-rxp"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="addBtn" destination="NyX-ZR-6sb" id="O5w-Kc-2Dd"/>
+                        <outlet property="changeBtn" destination="1vg-oz-5wd" id="Rxh-zG-mH4"/>
+                        <outlet property="checkBtn" destination="oUY-Ja-OxF" id="goR-OG-Ex4"/>
+                        <outlet property="deleteBtn" destination="LM8-8W-UpC" id="qA9-GX-vlj"/>
+                        <outlet property="integratedQueryBtn" destination="PUF-Ll-ITC" id="PAH-gp-buN"/>
+                        <outlet property="tableBtn" destination="0Is-uH-KHE" id="0eW-eR-yjb"/>
+                        <outlet property="transactionBtn" destination="5gP-tc-Ed4" id="Mng-b6-GlW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131" y="-34"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
